@@ -1,0 +1,6 @@
+<div class="flex flex-col items-center justify-center gap-3 py-12" role="status">
+  <span class="animate-spin rounded-full border-primary-600 border-t-transparent" [class]="sizeClass()"></span>
+  @if (label()) {
+    <p class="text-sm text-slate-500">{{ label() }}</p>
+  }
+</div>

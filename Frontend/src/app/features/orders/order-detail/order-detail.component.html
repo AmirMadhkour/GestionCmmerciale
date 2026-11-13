@@ -1,0 +1,118 @@
+@if (loading()) {
+  <app-loading-spinner label="Chargement de la commande..." />
+} @else if (order(); as current) {
+  <app-page-header
+    [heading]="'Commande ' + current.orderNumber"
+    [subtitle]="'Passée le ' + (current.orderDate | date: 'dd/MM/yyyy à HH:mm')"
+    backLink="/orders"
+    backLabel="Retour aux commandes"
+  >
+    <app-status-badge badge [status]="current.orderStatus" />
+
+    @if (isDraft()) {
+      <a [routerLink]="['/orders', current.id, 'edit']" class="btn-secondary">Modifier</a>
+    }
+    <ng-container *appHasRole="'Admin'">
+      @if (isDraft()) {
+        <button type="button" class="btn-success" (click)="ask('validate')">Valider</button>
+      }
+      @if (canCancel()) {
+        <button type="button" class="btn-warning" (click)="ask('cancel')">Annuler</button>
+      }
+      @if (canDelete()) {
+        <button type="button" class="btn-danger" (click)="ask('delete')">Supprimer</button>
+      }
+    </ng-container>
+  </app-page-header>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="space-y-6 lg:col-span-2">
+      <section class="card overflow-hidden">
+        <div class="card-header flex items-center justify-between">
+          <h2 class="card-title">Lignes de commande</h2>
+          <span class="text-sm text-slate-500">{{ itemCount() }} article(s)</span>
+        </div>
+        @if (current.lines.length === 0) {
+          <div class="empty-state">Cette commande ne contient aucune ligne.</div>
+        } @else {
+          <div class="overflow-x-auto">
+            <table class="table-base">
+              <thead>
+                <tr>
+                  <th>Produit</th>
+                  <th class="text-right">Prix unitaire HT</th>
+                  <th class="text-right">Quantité</th>
+                  <th class="text-right">Total HT</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 bg-white">
+                @for (line of current.lines; track line.productId) {
+                  <tr>
+                    <td>
+                      <a class="link" [routerLink]="['/products', line.productId]">{{ line.productName || 'Produit' }}</a>
+                    </td>
+                    <td class="text-right">{{ line.unitPrice | currency }}</td>
+                    <td class="text-right">{{ line.quantity }}</td>
+                    <td class="text-right font-medium">{{ line.lineTotal | currency }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </section>
+    </div>
+
+    <aside class="space-y-6">
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Client</h2>
+        </div>
+        <div class="card-body">
+          <a class="link text-base" [routerLink]="['/clients', current.clientId]">{{ current.clientName || 'Voir le client' }}</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Montants</h2>
+        </div>
+        <dl class="card-body space-y-3 text-sm">
+          <div class="flex justify-between">
+            <dt class="text-slate-500">Total HT</dt>
+            <dd class="font-medium text-slate-900">{{ current.totalHt | currency }}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-slate-500">TVA ({{ vatRate | percent }})</dt>
+            <dd class="font-medium text-slate-900">{{ totalVat() | currency }}</dd>
+          </div>
+          <div class="flex justify-between border-t border-slate-200 pt-3">
+            <dt class="font-semibold text-slate-900">Total TTC</dt>
+            <dd class="text-lg font-bold text-primary-700">{{ current.totalTTC | currency }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      @if (isDraft()) {
+        <p class="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-800">
+          Cette commande est un brouillon : le stock ne sera décrémenté qu’après sa validation par un administrateur.
+        </p>
+      } @else if (isCancelled()) {
+        <p class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-800">Cette commande a été annulée.</p>
+      }
+    </aside>
+  </div>
+
+  @if (dialog(); as config) {
+    <app-confirm-dialog
+      [open]="true"
+      [heading]="config.heading"
+      [message]="config.message"
+      [confirmLabel]="config.confirmLabel"
+      [variant]="config.variant"
+      [busy]="busy()"
+      (confirmed)="confirmAction()"
+      (cancelled)="closeDialog()"
+    />
+  }
+}

@@ -1,0 +1,96 @@
+<app-page-header
+  [heading]="heading()"
+  [subtitle]="isEdit() ? 'Mettez à jour les informations du client' : 'Renseignez les informations du nouveau client'"
+  [backLink]="backLink()"
+/>
+
+@if (loading()) {
+  <app-loading-spinner label="Chargement du client..." />
+} @else {
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="card">
+    <div class="card-body grid grid-cols-1 gap-5 md:grid-cols-2">
+      <div>
+        <label for="firstNameOrCompany" class="form-label">Prénom ou raison sociale <span class="text-red-500">*</span></label>
+        <input
+          id="firstNameOrCompany"
+          formControlName="firstNameOrCompany"
+          class="form-input"
+          [class.form-input-invalid]="isInvalid(form.controls.firstNameOrCompany)"
+        />
+        <app-field-error [control]="form.controls.firstNameOrCompany" label="Le prénom ou la raison sociale" />
+      </div>
+
+      <div>
+        <label for="lastName" class="form-label">Nom</label>
+        <input id="lastName" formControlName="lastName" class="form-input" [class.form-input-invalid]="isInvalid(form.controls.lastName)" />
+        <app-field-error [control]="form.controls.lastName" label="Le nom" />
+      </div>
+
+      <div>
+        <label for="email" class="form-label">Email <span class="text-red-500">*</span></label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          class="form-input"
+          [class.form-input-invalid]="isInvalid(form.controls.email)"
+        />
+        <app-field-error [control]="form.controls.email" label="L’email" />
+      </div>
+
+      <div>
+        <label for="phone" class="form-label">Téléphone <span class="text-red-500">*</span></label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="+216 12 345 678"
+          class="form-input"
+          [class.form-input-invalid]="isInvalid(form.controls.phone)"
+        />
+        <app-field-error [control]="form.controls.phone" label="Le téléphone" />
+      </div>
+
+      <div class="md:col-span-2">
+        <div class="mb-2 flex items-center justify-between">
+          <span class="form-label mb-0">Adresse</span>
+          <button type="button" class="btn-ghost btn-sm" (click)="addAddressLine()">+ Ajouter une ligne</button>
+        </div>
+        <div formArrayName="address" class="space-y-2">
+          @for (line of addressLines.controls; track line; let i = $index) {
+            <div class="flex items-start gap-2">
+              <div class="flex-1">
+                <input
+                  class="form-input"
+                  [formControlName]="i"
+                  [placeholder]="i === 0 ? 'Rue, numéro' : 'Complément (ville, code postal...)'"
+                  [class.form-input-invalid]="isInvalid(line)"
+                />
+                <app-field-error [control]="line" label="La ligne d’adresse" />
+              </div>
+              <button
+                type="button"
+                class="btn-ghost btn-sm mt-1 text-red-600"
+                aria-label="Supprimer la ligne"
+                (click)="removeAddressLine(i)"
+              >
+                ✕
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-3 border-t border-slate-200 px-5 py-4">
+      <a [routerLink]="backLink()" class="btn-secondary">Annuler</a>
+      <button type="submit" class="btn-primary" [disabled]="submitting()">
+        @if (submitting()) {
+          <span class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+        }
+        {{ isEdit() ? 'Enregistrer' : 'Créer le client' }}
+      </button>
+    </div>
+  </form>
+}

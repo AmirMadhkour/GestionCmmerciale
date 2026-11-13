@@ -1,0 +1,142 @@
+<app-page-header
+  [heading]="heading()"
+  [subtitle]="isEdit() ? 'Modifiez les lignes de la commande en brouillon' : 'Sélectionnez un client puis ajoutez les produits commandés'"
+  [backLink]="backLink()"
+/>
+
+@if (loading()) {
+  <app-loading-spinner label="Préparation du formulaire..." />
+} @else {
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="space-y-6 lg:col-span-2">
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Client</h2>
+        </div>
+        <div class="card-body">
+          <label for="clientId" class="form-label">Client <span class="text-red-500">*</span></label>
+          <select id="clientId" formControlName="clientId" class="form-input" [class.form-input-invalid]="isInvalid(form.controls.clientId)">
+            <option value="" disabled>Sélectionnez un client</option>
+            @for (client of clients(); track client.id) {
+              <option [value]="client.id">{{ displayName(client) }} — {{ client.email }}</option>
+            }
+          </select>
+          <app-field-error [control]="form.controls.clientId" label="Le client" />
+          @if (isEdit()) {
+            <p class="mt-1 text-xs text-slate-400">Le client d’une commande existante ne peut pas être modifié.</p>
+          } @else if (clients().length === 0) {
+            <p class="mt-2 text-sm text-amber-700">Aucun client disponible. Créez d’abord un client.</p>
+          }
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-header flex items-center justify-between">
+          <h2 class="card-title">Lignes de commande</h2>
+          <button type="button" class="btn-secondary btn-sm" (click)="addLine()">+ Ajouter un produit</button>
+        </div>
+
+        <div formArrayName="lines" class="divide-y divide-slate-100">
+          @for (line of lines.controls; track line; let i = $index) {
+            <div [formGroupName]="i" class="grid grid-cols-12 items-start gap-3 px-5 py-4">
+              <div class="col-span-12 sm:col-span-6">
+                <label class="form-label sm:sr-only" [for]="'product-' + i">Produit</label>
+                <select
+                  [id]="'product-' + i"
+                  formControlName="productId"
+                  class="form-input"
+                  [class.form-input-invalid]="isInvalid(line.controls.productId)"
+                >
+                  <option value="" disabled>Sélectionnez un produit</option>
+                  @for (product of products(); track product.id) {
+                    <option [value]="product.id" [disabled]="isProductTaken(product.id, i)">
+                      {{ product.reference }} — {{ product.name }} (stock : {{ product.stockQuantity }})
+                    </option>
+                  }
+                </select>
+                <app-field-error [control]="line.controls.productId" label="Le produit" />
+                @if (lineSummaries()[i].insufficientStock) {
+                  <p class="mt-1 text-xs font-medium text-amber-600">
+                    Stock insuffisant ({{ lineSummaries()[i].product?.stockQuantity }} disponible) : la validation sera refusée.
+                  </p>
+                }
+              </div>
+
+              <div class="col-span-4 sm:col-span-2">
+                <label class="form-label sm:sr-only" [for]="'quantity-' + i">Quantité</label>
+                <input
+                  [id]="'quantity-' + i"
+                  type="number"
+                  min="1"
+                  step="1"
+                  formControlName="quantity"
+                  class="form-input"
+                  [class.form-input-invalid]="isInvalid(line.controls.quantity)"
+                />
+                <app-field-error [control]="line.controls.quantity" label="La quantité" />
+              </div>
+
+              <div class="col-span-6 text-right sm:col-span-3">
+                <p class="text-xs text-slate-400">{{ lineSummaries()[i].unitPrice | currency }} / unité</p>
+                <p class="text-sm font-semibold text-slate-900">{{ lineSummaries()[i].lineTotal | currency }}</p>
+              </div>
+
+              <div class="col-span-2 flex justify-end sm:col-span-1">
+                <button type="button" class="btn-ghost btn-sm text-red-600" aria-label="Supprimer la ligne" (click)="removeLine(i)">✕</button>
+              </div>
+            </div>
+          } @empty {
+            <div class="empty-state">Aucune ligne. Ajoutez au moins un produit.</div>
+          }
+        </div>
+
+        @if (lines.touched && lines.errors; as errors) {
+          <p class="border-t border-slate-100 px-5 py-3 text-xs font-medium text-red-600">
+            {{ errors['server'] ?? 'La commande doit contenir au moins une ligne.' }}
+          </p>
+        }
+      </section>
+    </div>
+
+    <aside class="space-y-4">
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Récapitulatif</h2>
+        </div>
+        <dl class="card-body space-y-3 text-sm">
+          <div class="flex justify-between">
+            <dt class="text-slate-500">Articles</dt>
+            <dd class="font-medium text-slate-900">{{ lines.length }}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-slate-500">Total HT</dt>
+            <dd class="font-medium text-slate-900">{{ totalHt() | currency }}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-slate-500">TVA ({{ vatRate | percent }})</dt>
+            <dd class="font-medium text-slate-900">{{ totalVat() | currency }}</dd>
+          </div>
+          <div class="flex justify-between border-t border-slate-200 pt-3">
+            <dt class="font-semibold text-slate-900">Total TTC</dt>
+            <dd class="text-lg font-bold text-primary-700">{{ totalTtc() | currency }}</dd>
+          </div>
+        </dl>
+        @if (hasStockWarning()) {
+          <p class="mx-5 mb-5 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
+            Certaines quantités dépassent le stock disponible. La commande pourra être enregistrée mais pas validée.
+          </p>
+        }
+      </section>
+
+      <div class="flex flex-col gap-2">
+        <button type="submit" class="btn-primary w-full" [disabled]="submitting()">
+          @if (submitting()) {
+            <span class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+          }
+          {{ isEdit() ? 'Enregistrer les modifications' : 'Créer la commande' }}
+        </button>
+        <a [routerLink]="backLink()" class="btn-secondary w-full">Annuler</a>
+      </div>
+    </aside>
+  </form>
+}

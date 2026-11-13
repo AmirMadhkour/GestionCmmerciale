@@ -1,0 +1,390 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\tests\\GestionCommerciale.IntegrationTests\\GestionCommerciale.IntegrationTests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Api\\GestionCommerciale.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Api\\GestionCommerciale.Api.csproj",
+        "projectName": "GestionCommerciale.Api",
+        "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Api\\GestionCommerciale.Api.csproj",
+        "packagesPath": "C:\\Users\\AMIR\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Api\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\AMIR\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\GestionCommerciale.Application.csproj": {
+                "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\GestionCommerciale.Application.csproj"
+              },
+              "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj": {
+                "projectPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.*, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.428/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\GestionCommerciale.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\GestionCommerciale.Application.csproj",
+        "projectName": "GestionCommerciale.Application",
+        "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\GestionCommerciale.Application.csproj",
+        "packagesPath": "C:\\Users\\AMIR\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\AMIR\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj": {
+                "projectPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.428/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj",
+        "projectName": "GestionCommerciale.Domain",
+        "projectPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj",
+        "packagesPath": "C:\\Users\\AMIR\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\AMIR\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.428/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
+        "projectName": "GestionCommerciale.Infrastructure",
+        "projectPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\AMIR\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\AMIR\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\GestionCommerciale.Application.csproj": {
+                "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Application\\GestionCommerciale.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.*, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[8.0.*, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.*, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[8.0.*, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.23.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.428/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\tests\\GestionCommerciale.IntegrationTests\\GestionCommerciale.IntegrationTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\tests\\GestionCommerciale.IntegrationTests\\GestionCommerciale.IntegrationTests.csproj",
+        "projectName": "GestionCommerciale.IntegrationTests",
+        "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\tests\\GestionCommerciale.IntegrationTests\\GestionCommerciale.IntegrationTests.csproj",
+        "packagesPath": "C:\\Users\\AMIR\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\tests\\GestionCommerciale.IntegrationTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\AMIR\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Api\\GestionCommerciale.Api.csproj": {
+                "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Api\\GestionCommerciale.Api.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.428/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

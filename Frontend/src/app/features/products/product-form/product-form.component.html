@@ -1,0 +1,109 @@
+<app-page-header
+  [heading]="heading()"
+  [subtitle]="isEdit() ? 'Mettez à jour les informations du produit' : 'Ajoutez un produit au catalogue'"
+  [backLink]="backLink()"
+/>
+
+@if (loading()) {
+  <app-loading-spinner label="Chargement du produit..." />
+} @else {
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="card lg:col-span-2">
+      <div class="card-body grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div>
+          <label for="reference" class="form-label">Référence <span class="text-red-500">*</span></label>
+          <input
+            id="reference"
+            formControlName="reference"
+            placeholder="PRD-001"
+            class="form-input font-mono"
+            [class.form-input-invalid]="isInvalid(form.controls.reference)"
+          />
+          <app-field-error [control]="form.controls.reference" label="La référence" />
+        </div>
+
+        <div>
+          <label for="name" class="form-label">Nom <span class="text-red-500">*</span></label>
+          <input id="name" formControlName="name" class="form-input" [class.form-input-invalid]="isInvalid(form.controls.name)" />
+          <app-field-error [control]="form.controls.name" label="Le nom" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            rows="4"
+            formControlName="description"
+            class="form-input"
+            [class.form-input-invalid]="isInvalid(form.controls.description)"
+          ></textarea>
+          <app-field-error [control]="form.controls.description" label="La description" />
+        </div>
+
+        <div>
+          <label for="unitPriceHT" class="form-label">Prix unitaire HT <span class="text-red-500">*</span></label>
+          <input
+            id="unitPriceHT"
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="unitPriceHT"
+            class="form-input"
+            [class.form-input-invalid]="isInvalid(form.controls.unitPriceHT)"
+          />
+          <app-field-error [control]="form.controls.unitPriceHT" label="Le prix" />
+        </div>
+
+        <div>
+          @if (isEdit()) {
+            <span class="form-label">Stock actuel</span>
+            <p class="form-input bg-slate-50 text-slate-600">{{ currentStock() }}</p>
+            <p class="mt-1 text-xs text-slate-400">Le stock évolue automatiquement à la validation et à l’annulation des commandes.</p>
+          } @else {
+            <label for="initialStock" class="form-label">Stock initial <span class="text-red-500">*</span></label>
+            <input
+              id="initialStock"
+              type="number"
+              min="0"
+              step="1"
+              formControlName="initialStock"
+              class="form-input"
+              [class.form-input-invalid]="isInvalid(form.controls.initialStock)"
+            />
+            <app-field-error [control]="form.controls.initialStock" label="Le stock initial" />
+          }
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 border-t border-slate-200 px-5 py-4">
+        <a [routerLink]="backLink()" class="btn-secondary">Annuler</a>
+        <button type="submit" class="btn-primary" [disabled]="submitting()">
+          @if (submitting()) {
+            <span class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+          }
+          {{ isEdit() ? 'Enregistrer' : 'Créer le produit' }}
+        </button>
+      </div>
+    </div>
+
+    <aside class="card h-fit">
+      <div class="card-header">
+        <h2 class="card-title">Aperçu du prix</h2>
+      </div>
+      <dl class="card-body space-y-3 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-slate-500">Prix HT</dt>
+          <dd class="font-medium text-slate-900">{{ priceHt() | currency }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-slate-500">TVA ({{ vatRate | percent }})</dt>
+          <dd class="font-medium text-slate-900">{{ priceVat() | currency }}</dd>
+        </div>
+        <div class="flex justify-between border-t border-slate-200 pt-3">
+          <dt class="font-semibold text-slate-900">Prix TTC</dt>
+          <dd class="text-lg font-bold text-primary-700">{{ priceTtc() | currency }}</dd>
+        </div>
+      </dl>
+    </aside>
+  </form>
+}

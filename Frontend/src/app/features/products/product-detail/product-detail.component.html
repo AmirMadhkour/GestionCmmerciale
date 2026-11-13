@@ -1,0 +1,78 @@
+@if (loading()) {
+  <app-loading-spinner label="Chargement du produit..." />
+} @else if (product(); as current) {
+  <app-page-header [heading]="current.name" [subtitle]="'Référence ' + current.reference" backLink="/products" backLabel="Retour aux produits">
+    <ng-container *appHasRole="'Admin'">
+      <a [routerLink]="['/products', current.id, 'edit']" class="btn-secondary">Modifier</a>
+      <button type="button" class="btn-danger" (click)="confirmOpen.set(true)">Supprimer</button>
+    </ng-container>
+  </app-page-header>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <section class="card lg:col-span-2">
+      <div class="card-header">
+        <h2 class="card-title">Informations</h2>
+      </div>
+      <dl class="card-body grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div>
+          <dt class="info-label">Référence</dt>
+          <dd class="info-value font-mono">{{ current.reference }}</dd>
+        </div>
+        <div>
+          <dt class="info-label">Nom</dt>
+          <dd class="info-value">{{ current.name }}</dd>
+        </div>
+        <div class="sm:col-span-2">
+          <dt class="info-label">Description</dt>
+          <dd class="info-value whitespace-pre-line">
+            @if (current.description) {
+              {{ current.description }}
+            } @else {
+              <span class="text-slate-400">Aucune description</span>
+            }
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="space-y-6">
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Tarification</h2>
+        </div>
+        <dl class="card-body space-y-3 text-sm">
+          <div class="flex justify-between">
+            <dt class="text-slate-500">Prix HT</dt>
+            <dd class="font-medium text-slate-900">{{ current.unitPriceHT | currency }}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-slate-500">TVA ({{ vatRate | percent }})</dt>
+            <dd class="font-medium text-slate-900">{{ priceVat() | currency }}</dd>
+          </div>
+          <div class="flex justify-between border-t border-slate-200 pt-3">
+            <dt class="font-semibold text-slate-900">Prix TTC</dt>
+            <dd class="text-lg font-bold text-primary-700">{{ priceTtc() | currency }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="card p-5">
+        <p class="info-label">Stock disponible</p>
+        <div class="mt-2 flex items-center justify-between">
+          <p class="text-3xl font-bold text-slate-900">{{ current.stockQuantity }}</p>
+          <span class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset" [class]="stockClass()">{{ stockText() }}</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <app-confirm-dialog
+    heading="Supprimer le produit"
+    confirmLabel="Supprimer"
+    [open]="confirmOpen()"
+    [message]="'Voulez-vous vraiment supprimer le produit « ' + current.name + ' » ? Un produit utilisé dans des commandes ne peut pas être supprimé.'"
+    [busy]="deleting()"
+    (confirmed)="confirmDelete()"
+    (cancelled)="confirmOpen.set(false)"
+  />
+}

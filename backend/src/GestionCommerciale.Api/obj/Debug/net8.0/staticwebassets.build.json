@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "RaWrZq68GbAb4MgDHfyQH2mXN46mkO5P7cd3PetkEnU=",
+  "Source": "GestionCommerciale.Api",
+  "BasePath": "_content/GestionCommerciale.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

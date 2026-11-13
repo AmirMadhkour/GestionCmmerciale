@@ -1,0 +1,102 @@
+@if (loading()) {
+  <app-loading-spinner label="Chargement du client..." />
+} @else if (client(); as current) {
+  <app-page-header [heading]="displayName()" [subtitle]="'Client depuis le ' + (current.createdAt | date: 'dd/MM/yyyy')" backLink="/clients" backLabel="Retour aux clients">
+    <a routerLink="/orders/new" [queryParams]="{ clientId: current.id }" class="btn-primary">+ Nouvelle commande</a>
+    <ng-container *appHasRole="'Admin'">
+      <a [routerLink]="['/clients', current.id, 'edit']" class="btn-secondary">Modifier</a>
+      <button type="button" class="btn-danger" [disabled]="orders().length > 0" [title]="orders().length > 0 ? 'Un client ayant des commandes ne peut pas être supprimé' : ''" (click)="confirmOpen.set(true)">
+        Supprimer
+      </button>
+    </ng-container>
+  </app-page-header>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <section class="card lg:col-span-1">
+      <div class="card-header">
+        <h2 class="card-title">Coordonnées</h2>
+      </div>
+      <dl class="card-body space-y-4">
+        <div>
+          <dt class="info-label">Email</dt>
+          <dd class="info-value">
+            <a class="link" [href]="'mailto:' + current.email">{{ current.email }}</a>
+          </dd>
+        </div>
+        <div>
+          <dt class="info-label">Téléphone</dt>
+          <dd class="info-value">{{ current.phone }}</dd>
+        </div>
+        <div>
+          <dt class="info-label">Adresse</dt>
+          <dd class="info-value">
+            @for (line of current.address; track $index) {
+              <span class="block">{{ line }}</span>
+            } @empty {
+              <span class="text-slate-400">Non renseignée</span>
+            }
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="space-y-6 lg:col-span-2">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div class="card p-5">
+          <p class="info-label">Commandes</p>
+          <p class="mt-2 text-2xl font-bold text-slate-900">{{ orders().length }}</p>
+        </div>
+        <div class="card p-5">
+          <p class="info-label">En brouillon</p>
+          <p class="mt-2 text-2xl font-bold text-amber-600">{{ draftCount() }}</p>
+        </div>
+        <div class="card p-5">
+          <p class="info-label">CA validé (TTC)</p>
+          <p class="mt-2 text-2xl font-bold text-emerald-600">{{ validatedRevenue() | currency }}</p>
+        </div>
+      </div>
+
+      <section class="card overflow-hidden">
+        <div class="card-header">
+          <h2 class="card-title">Historique des commandes</h2>
+        </div>
+        @if (orders().length === 0) {
+          <div class="empty-state">Ce client n’a encore passé aucune commande.</div>
+        } @else {
+          <div class="overflow-x-auto">
+            <table class="table-base">
+              <thead>
+                <tr>
+                  <th>N° commande</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                  <th class="text-right">Total TTC</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 bg-white">
+                @for (order of orders(); track order.id) {
+                  <tr>
+                    <td><a class="link" [routerLink]="['/orders', order.id]">{{ order.orderNumber }}</a></td>
+                    <td>{{ order.orderDate | date: 'dd/MM/yyyy' }}</td>
+                    <td><app-status-badge [status]="order.status" /></td>
+                    <td class="text-right font-medium">{{ order.totalTTC | currency }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </section>
+    </div>
+  </div>
+
+  <app-confirm-dialog
+    heading="Supprimer le client"
+    confirmLabel="Supprimer"
+    [open]="confirmOpen()"
+    [message]="'Voulez-vous vraiment supprimer le client « ' + displayName() + ' » ? Cette action est irréversible.'"
+    [busy]="deleting()"
+    (confirmed)="confirmDelete()"
+    (cancelled)="confirmOpen.set(false)"
+  />
+}

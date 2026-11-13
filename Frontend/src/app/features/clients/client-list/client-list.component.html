@@ -1,0 +1,75 @@
+<app-page-header heading="Clients" subtitle="Gérez votre portefeuille clients">
+  <a *appHasRole="'Admin'" routerLink="/clients/new" class="btn-primary">+ Nouveau client</a>
+</app-page-header>
+
+<div class="card overflow-hidden">
+  <div class="flex flex-col gap-3 border-b border-slate-200 p-4 sm:flex-row sm:items-center sm:justify-between">
+    <input
+      type="search"
+      class="form-input sm:max-w-xs"
+      placeholder="Rechercher par nom, email, téléphone..."
+      [value]="search()"
+      (input)="onSearch($event)"
+    />
+    <p class="text-sm text-slate-500">{{ filtered().length }} client(s)</p>
+  </div>
+
+  @if (loading()) {
+    <app-loading-spinner label="Chargement des clients..." />
+  } @else if (filtered().length === 0) {
+    <div class="empty-state">
+      @if (search()) {
+        Aucun client ne correspond à votre recherche.
+      } @else {
+        Aucun client pour le moment.
+      }
+    </div>
+  } @else {
+    <div class="overflow-x-auto">
+      <table class="table-base">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Créé le</th>
+            <th class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 bg-white">
+          @for (client of filtered(); track client.id) {
+            <tr>
+              <td>
+                <a class="link" [routerLink]="['/clients', client.id]">{{ displayName(client) }}</a>
+              </td>
+              <td>{{ client.email }}</td>
+              <td>{{ client.phone }}</td>
+              <td class="max-w-xs truncate">{{ client.address.join(', ') || '—' }}</td>
+              <td>{{ client.createdAt | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <div class="flex justify-end gap-2">
+                  <a class="btn-secondary btn-sm" [routerLink]="['/clients', client.id]">Voir</a>
+                  <ng-container *appHasRole="'Admin'">
+                    <a class="btn-secondary btn-sm" [routerLink]="['/clients', client.id, 'edit']">Modifier</a>
+                    <button type="button" class="btn-danger btn-sm" (click)="askDelete(client)">Supprimer</button>
+                  </ng-container>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
+
+<app-confirm-dialog
+  heading="Supprimer le client"
+  confirmLabel="Supprimer"
+  [open]="pendingDelete() !== null"
+  [message]="deleteMessage()"
+  [busy]="deleting()"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()"
+/>

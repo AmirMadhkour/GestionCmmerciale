@@ -1,0 +1,25 @@
+@if (open()) {
+  <div class="fixed inset-0 z-40 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 bg-slate-900/50" (click)="cancel()"></div>
+    <div class="relative w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
+      <div class="flex items-start gap-4">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg font-bold" [class]="iconClass()">!</span>
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold text-slate-900">{{ heading() }}</h2>
+          @if (message()) {
+            <p class="mt-2 text-sm text-slate-600">{{ message() }}</p>
+          }
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end gap-3">
+        <button type="button" class="btn-secondary" [disabled]="busy()" (click)="cancel()">{{ cancelLabel() }}</button>
+        <button type="button" [class]="confirmButtonClass()" [disabled]="busy()" (click)="confirm()">
+          @if (busy()) {
+            <span class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+          }
+          {{ confirmLabel() }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

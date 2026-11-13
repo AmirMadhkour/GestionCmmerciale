@@ -1,0 +1,25 @@
+<div class="pointer-events-none fixed inset-x-0 top-4 z-50 flex flex-col items-center gap-3 px-4 sm:items-end sm:px-6" aria-live="polite">
+  @for (notification of notifications(); track notification.id) {
+    <div
+      class="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-xl border px-4 py-3 shadow-lg"
+      [class]="containerClasses[notification.type]"
+      role="status"
+    >
+      <span
+        class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+        [class]="iconClasses[notification.type]"
+      >
+        {{ icons[notification.type] }}
+      </span>
+      <p class="flex-1 text-sm font-medium">{{ notification.message }}</p>
+      <button
+        type="button"
+        class="rounded p-0.5 text-current opacity-60 transition hover:opacity-100"
+        aria-label="Fermer"
+        (click)="dismiss(notification.id)"
+      >
+        ✕
+      </button>
+    </div>
+  }
+</div>
