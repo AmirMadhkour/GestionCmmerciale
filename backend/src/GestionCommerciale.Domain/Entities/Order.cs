@@ -30,6 +30,9 @@ public class Order : BaseEntity
 
     public static Order  Create ( Guid clientId)
     {
+        if (clientId == Guid.Empty)
+            throw new BusinessRuleException("Le client est obligatoire.");
+
         return new Order
         {
             Id = Guid.NewGuid(),
@@ -57,9 +60,15 @@ public class Order : BaseEntity
         throw new BusinessRuleException("Prix négatif , Impossible");
 
         var existingLine = _lines.FirstOrDefault(l => l.ProductId == product.Id);
+
+        var requestedQuantity = (existingLine?.Quantity ?? 0) + Q;
+        if (requestedQuantity > product.StockQuantity)
+            throw new BusinessRuleException(
+                $"Stock insuffisant pour « {product.ProductName} » : {product.StockQuantity} disponible(s), {requestedQuantity} demandé(s).");
+
         if (existingLine != null)
         {
-            existingLine.UpdateQuantity(existingLine.Quantity + Q);
+            existingLine.UpdateQuantity(requestedQuantity);
         }
         else
         {

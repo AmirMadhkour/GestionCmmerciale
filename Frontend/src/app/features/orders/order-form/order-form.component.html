@@ -57,7 +57,7 @@
                 <app-field-error [control]="line.controls.productId" label="Le produit" />
                 @if (lineSummaries()[i].insufficientStock) {
                   <p class="mt-1 text-xs font-medium text-amber-600">
-                    Stock insuffisant ({{ lineSummaries()[i].product?.stockQuantity }} disponible) : la validation sera refusée.
+                    Stock insuffisant : {{ lineSummaries()[i].product?.stockQuantity }} disponible(s).
                   </p>
                 }
               </div>
@@ -123,13 +123,13 @@
         </dl>
         @if (hasStockWarning()) {
           <p class="mx-5 mb-5 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
-            Certaines quantités dépassent le stock disponible. La commande pourra être enregistrée mais pas validée.
+            Certaines quantités dépassent le stock disponible. Réduisez-les pour pouvoir enregistrer la commande.
           </p>
         }
       </section>
 
       <div class="flex flex-col gap-2">
-        <button type="submit" class="btn-primary w-full" [disabled]="submitting()">
+        <button type="submit" class="btn-primary w-full" [disabled]="submitting() || hasStockWarning()">
           @if (submitting()) {
             <span class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
           }

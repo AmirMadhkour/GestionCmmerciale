@@ -25,7 +25,6 @@ namespace GestionCommerciale.Infrastructure.Migrations
             modelBuilder.Entity("GestionCommerciale.Domain.Entities.Client", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
@@ -63,7 +62,6 @@ namespace GestionCommerciale.Infrastructure.Migrations
             modelBuilder.Entity("GestionCommerciale.Domain.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ClientId")
@@ -76,7 +74,8 @@ namespace GestionCommerciale.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("OrderNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -92,13 +91,16 @@ namespace GestionCommerciale.Infrastructure.Migrations
 
                     b.HasIndex("ClientId");
 
+                    b.HasIndex("OrderNumber")
+                        .IsUnique()
+                        .HasFilter("[OrderNumber] IS NOT NULL");
+
                     b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("GestionCommerciale.Domain.Entities.OrderLine", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -131,7 +133,6 @@ namespace GestionCommerciale.Infrastructure.Migrations
             modelBuilder.Entity("GestionCommerciale.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -167,7 +168,6 @@ namespace GestionCommerciale.Infrastructure.Migrations
             modelBuilder.Entity("GestionCommerciale.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")

@@ -2605,11 +2605,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
       "projectName": "GestionCommerciale.Infrastructure",
-      "projectPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\AMIR\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AMIR\\AppData\\Roaming\\NuGet\\NuGet.Config"

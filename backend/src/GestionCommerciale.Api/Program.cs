@@ -43,11 +43,10 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 await app.ApplyMigrationsAndSeedDatabaseAsync();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 
 app.UseHttpsRedirection();
 
@@ -59,3 +58,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program {}

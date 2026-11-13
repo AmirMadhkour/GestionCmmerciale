@@ -15,3 +15,10 @@ C:\Users\AMIR\Desktop\mini_project_isi_madhkour\backend\src\GestionCommerciale.I
 C:\Users\AMIR\Desktop\mini_project_isi_madhkour\backend\src\GestionCommerciale.Infrastructure\obj\Debug\net8.0\refint\GestionCommerciale.Infrastructure.dll
 C:\Users\AMIR\Desktop\mini_project_isi_madhkour\backend\src\GestionCommerciale.Infrastructure\obj\Debug\net8.0\GestionCommerciale.Infrastructure.pdb
 C:\Users\AMIR\Desktop\mini_project_isi_madhkour\backend\src\GestionCommerciale.Infrastructure\obj\Debug\net8.0\ref\GestionCommerciale.Infrastructure.dll
+C:\Users\AMIR\Desktop\mini_project_isi_madhkour\backend\src\GestionCommerciale.Infrastructure\obj\Debug\net8.0\GestionCommerciale.Infrastructure.sourcelink.json
+C:\Users\AMIR\AppData\Local\Temp\claude\f495dde53aca12fe\5a6f3c4f-5184-4021-9fbe-9b882fced898\scratchpad\apitest\GestionCommerciale.Infrastructure.deps.json
+C:\Users\AMIR\AppData\Local\Temp\claude\f495dde53aca12fe\5a6f3c4f-5184-4021-9fbe-9b882fced898\scratchpad\apitest\GestionCommerciale.Infrastructure.dll
+C:\Users\AMIR\AppData\Local\Temp\claude\f495dde53aca12fe\5a6f3c4f-5184-4021-9fbe-9b882fced898\scratchpad\apitest\GestionCommerciale.Infrastructure.pdb
+C:\Users\AMIR\AppData\Local\Temp\claude\f495dde53aca12fe\5a6f3c4f-5184-4021-9fbe-9b882fced898\scratchpad\itest\GestionCommerciale.Infrastructure.deps.json
+C:\Users\AMIR\AppData\Local\Temp\claude\f495dde53aca12fe\5a6f3c4f-5184-4021-9fbe-9b882fced898\scratchpad\itest\GestionCommerciale.Infrastructure.dll
+C:\Users\AMIR\AppData\Local\Temp\claude\f495dde53aca12fe\5a6f3c4f-5184-4021-9fbe-9b882fced898\scratchpad\itest\GestionCommerciale.Infrastructure.pdb

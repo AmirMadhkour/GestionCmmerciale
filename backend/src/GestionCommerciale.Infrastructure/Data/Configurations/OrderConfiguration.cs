@@ -11,7 +11,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.ToTable("Orders");
         builder.HasKey(o => o.Id);
 
-        // Numéro de commande unique (EF ajoute le filtre IS NOT NULL pour SQL Server)
+        builder.Property(o => o.OrderNumber).HasMaxLength(30);
         builder.HasIndex(o => o.OrderNumber).IsUnique();
 
         

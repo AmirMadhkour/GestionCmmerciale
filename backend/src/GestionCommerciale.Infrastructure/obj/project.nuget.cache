@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "t4Hl8GbeCmY=",
+  "dgSpecHash": "176DG11RLjI=",
   "success": true,
-  "projectFilePath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Infrastructure\\GestionCommerciale.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AMIR\\.nuget\\packages\\azure.core\\1.41.0\\azure.core.1.41.0.nupkg.sha512",
     "C:\\Users\\AMIR\\.nuget\\packages\\azure.identity\\1.12.1\\azure.identity.1.12.1.nupkg.sha512",

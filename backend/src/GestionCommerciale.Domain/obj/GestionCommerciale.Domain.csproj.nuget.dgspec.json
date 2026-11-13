@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj": {}
+    "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj": {}
   },
   "projects": {
-    "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj": {
+    "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj",
         "projectName": "GestionCommerciale.Domain",
-        "projectPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj",
+        "projectPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\GestionCommerciale.Domain.csproj",
         "packagesPath": "C:\\Users\\AMIR\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\obj\\",
+        "outputPath": "C:\\Users\\AMIR\\Desktop\\mini_project_isi_madhkour\\backend\\src\\GestionCommerciale.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AMIR\\AppData\\Roaming\\NuGet\\NuGet.Config"
